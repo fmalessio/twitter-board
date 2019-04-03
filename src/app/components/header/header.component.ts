@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { User } from 'src/app/classes/user';
 
 declare const gapi: any;
 
@@ -9,6 +10,12 @@ declare const gapi: any;
 })
 export class HeaderComponent implements OnInit {
 
+  title: string = 'Twitter Board';
+
+  // Login event emitter
+  @Output() loginChange: EventEmitter<User> = new EventEmitter<User>();
+
+  // Google Api
   @ViewChild('googleBtn') googleBtn: ElementRef;
   private clientId: string = '425080559212-0futf7p75r8kcl8lv0n72iiiqo6ktt2f.apps.googleusercontent.com';
   private scope = [
@@ -41,22 +48,25 @@ export class HeaderComponent implements OnInit {
       function (googleUser) {
 
         let profile = googleUser.getBasicProfile();
-        console.log('Token || ' + googleUser.getAuthResponse().id_token);
-        console.log('ID: ' + profile.getId());
-        console.log('Name: ' + profile.getName());
-        console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail());
 
-        // TODO: save session on localstorage
+        let token = googleUser.getAuthResponse().id_token;
+        let user = new User(profile, token);
+        console.log('User: ' + user);
+        console.log('Token: ' + token);
+
+        that.loginChange.emit(user);
 
       }, function (error) {
         console.log(JSON.stringify(error, undefined, 2));
+        that.loginChange.emit(null);
       });
   }
 
   public signOut() {
+    let that = this;
     this.auth2.signOut().then(function () {
       console.log('User signed out.');
+      that.loginChange.emit(null);
     });
     // To check is signed
     // this.auth2.isSignedIn.get();
