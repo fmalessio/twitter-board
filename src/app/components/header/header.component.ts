@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { User } from 'src/app/classes/user';
-
 declare const gapi: any;
 
 @Component({
@@ -24,9 +23,14 @@ export class HeaderComponent implements OnInit {
   ].join(' ');
   public auth2: any;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit() {
+    this.googleInit();
   }
 
   public googleInit() {
@@ -70,10 +74,6 @@ export class HeaderComponent implements OnInit {
     });
     // To check is signed
     // this.auth2.isSignedIn.get();
-  }
-
-  ngAfterViewInit() {
-    this.googleInit();
   }
 
 }

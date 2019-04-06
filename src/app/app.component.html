@@ -1,10 +1,4 @@
+
 <app-header (loginChange)="setLoggedIn($event)"></app-header>
 
-<div *ngIf="checkSignedIn(); then thenBlock else elseBlock"></div>
-
-<ng-template #thenBlock>
-    <router-outlet></router-outlet>
-</ng-template>
-<ng-template #elseBlock>
-    <div>NO</div>
-</ng-template>
+<router-outlet></router-outlet>

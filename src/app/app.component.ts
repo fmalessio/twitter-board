@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from './classes/user';
 import { Router } from '@angular/router'
 
@@ -8,13 +8,26 @@ import { Router } from '@angular/router'
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  userNameStorage: string = "twiiter-board-user";
+  constructor(private router: Router) {
+  }
+
+  ngOnInit() {
+    this.nevigateBySession();
+  }
+
+  private nevigateBySession() {
+    if (this.checkSignedIn()) {
+      this.router.navigateByUrl("/home");
+    } else {
+      this.router.navigateByUrl("/signedout");
+    }
+  }
 
   public checkSignedIn() {
     if (window.localStorage) {
-      return localStorage.getItem(this.userNameStorage) !== null;
+      return localStorage.getItem(User.STORAGE_NAME) !== null;
     }
     throw new Error('LocalStorage is not supported!');
   }
@@ -24,16 +37,16 @@ export class AppComponent {
     console.log(user);
     if (user !== null) {
       if (window.localStorage) {
-        localStorage.setItem(this.userNameStorage, JSON.stringify(user));
+        localStorage.setItem(User.STORAGE_NAME, JSON.stringify(user));
       } else {
         throw new Error('LocalStorage is not supported!');
       }
 
     } else {
-      localStorage.removeItem(this.userNameStorage);
+      localStorage.removeItem(User.STORAGE_NAME);
     }
 
-    window.location.reload();
+    this.nevigateBySession();
   }
 
 }

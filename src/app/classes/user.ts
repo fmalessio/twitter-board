@@ -1,4 +1,7 @@
 export class User {
+
+    public static STORAGE_NAME = "twiiter-board-user";
+
     _id: number;
     name: string;
     email: string;
