@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { User } from './classes/user';
 import { Router } from '@angular/router'
+import { UserService } from './service/user.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +12,7 @@ import { Router } from '@angular/router'
 
 export class AppComponent implements OnInit {
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private ngZone: NgZone, private userService: UserService) {
   }
 
   ngOnInit() {
@@ -19,9 +21,10 @@ export class AppComponent implements OnInit {
 
   private nevigateBySession() {
     if (this.checkSignedIn()) {
-      this.router.navigateByUrl("/home");
+      this.ngZone.run(() =>
+        this.router.navigate(['/home']))
     } else {
-      this.router.navigateByUrl("/signedout");
+      this.router.navigate(['/signedout']);
     }
   }
 
@@ -37,16 +40,28 @@ export class AppComponent implements OnInit {
     console.log(user);
     if (user !== null) {
       if (window.localStorage) {
-        localStorage.setItem(User.STORAGE_NAME, JSON.stringify(user));
+        // Call login in the backend
+        this.userService.login(user).subscribe(
+          (data) => {
+            console.log("Backend login OK.");
+            console.log(data);
+            localStorage.setItem(User.STORAGE_NAME, JSON.stringify(user));
+            this.nevigateBySession();
+          },
+          (httpError: HttpErrorResponse) => {
+            console.log(`Backend returned code ${httpError.status}`);
+            localStorage.removeItem(User.STORAGE_NAME);
+            this.nevigateBySession();
+          }
+        );
       } else {
         throw new Error('LocalStorage is not supported!');
       }
 
     } else {
       localStorage.removeItem(User.STORAGE_NAME);
+      this.nevigateBySession();
     }
-
-    this.nevigateBySession();
   }
 
 }
