@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../classes/user';
+import { Board } from '../classes/board';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +10,7 @@ import { User } from '../classes/user';
 export class HomeComponent implements OnInit {
 
   user: User;
+  selectedBoard: Board;
 
   constructor() {
   }
@@ -16,6 +18,10 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     console.log("HomeComponent Init");
     this.user = JSON.parse(localStorage.getItem(User.STORAGE_NAME));
+  }
+
+  public setBoardSelect(board: Board) {
+    this.selectedBoard = board;
   }
 
 }

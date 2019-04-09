@@ -9,6 +9,7 @@ import { BoardsMenuComponent } from './boards-menu/boards-menu.component';
 import { SignedoutComponent } from './signedout/signedout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BoardDetailsComponent } from './board-details/board-details.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HeaderComponent,
     HomeComponent,
     BoardsMenuComponent,
-    SignedoutComponent
+    SignedoutComponent,
+    BoardDetailsComponent
   ],
   imports: [
     BrowserModule,

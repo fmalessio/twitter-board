@@ -3,9 +3,9 @@
   <p>
     Hola {{user.fullName}}!
   </p>
-  <app-boards-menu></app-boards-menu>
+  <app-boards-menu (onOpenBoard)="setBoardSelect($event)"></app-boards-menu>
 </div>
 
-<div id="details">
-  test
+<div id="details" *ngIf="selectedBoard">
+  <app-board-details [board]="selectedBoard"></app-board-details>
 </div>
