@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
 
   // Google Api
   @ViewChild('googleBtn') googleBtn: ElementRef;
-  private clientId: string = '425080559212-0futf7p75r8kcl8lv0n72iiiqo6ktt2f.apps.googleusercontent.com';
+  private clientId: string = '425080559212-hr2urltvsv5qjtvm213me5k1hljmrohh.apps.googleusercontent.com';
   private scope = [
     'profile',
     'email'
