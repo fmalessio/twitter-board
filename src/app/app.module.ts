@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { BoardsMenuComponent } from './boards-menu/boards-menu.component';
 import { SignedoutComponent } from './signedout/signedout.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

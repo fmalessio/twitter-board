@@ -22,9 +22,12 @@ export class AppComponent implements OnInit {
   private nevigateBySession() {
     if (this.checkSignedIn()) {
       this.ngZone.run(() =>
-        this.router.navigate(['/home']))
+        this.router.navigate(['/home'])
+      );
     } else {
-      this.router.navigate(['/signedout']);
+      this.ngZone.run(() =>
+        this.router.navigate(['/signedout'])
+      );
     }
   }
 
