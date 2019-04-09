@@ -1,0 +1,21 @@
+#board-list {
+    margin-top: 5px;
+    width: 100%;
+}
+
+#board-item:hover {
+    background-color: #007bff;
+    cursor: pointer;
+}
+
+#board-item-name {
+    width: 80%;
+}
+
+#board-item-remove {
+    width: 20%;
+}
+
+#board-item-name, #board-item-remove {
+    display: inline-block;
+}

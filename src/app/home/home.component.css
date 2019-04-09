@@ -1,3 +1,7 @@
+#details, #sidebar {
+    float: left;
+}
+
 #sidebar {
     width: 25vw;
     background-color: #1da1f2;
@@ -12,4 +16,8 @@
 #user-image {
     width: 96px;
     height: 96px;
+}
+
+#details {
+    width: 75 vw;
 }

@@ -1,3 +1,5 @@
+import { Board } from './board';
+
 export class User {
 
     public static STORAGE_NAME = "twitter-board-user";
@@ -7,6 +9,7 @@ export class User {
     fullName: string;
     imageUri: string;
     token: string;
+    boards: Board[];
 
     constructor(profile: any, token: string) {
         this._gid = profile.getId();

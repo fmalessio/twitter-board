@@ -1,22 +1,31 @@
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Nuevo board</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form>
-      <div class="form-group">
-        <div class="input-group">
-          <input #boardName id="boardName" class="form-control" placeholder="Board name">
+<div id="board-header">
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Nuevo board</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <div class="input-group">
+            <input #boardName id="boardName" class="form-control" placeholder="Board name">
+          </div>
         </div>
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close(boardName.value)">Crear</button>
-  </div>
-</ng-template>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close(boardName.value)">Crear</button>
+    </div>
+  </ng-template>
 
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Crear nuevo board</button>
+  <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Crear nuevo board</button>
+</div>
+
+<div id="board-list">
+  <div id="board-item" *ngFor="let board of boards">
+    <div id="board-item-name" (click)="openBoard(board)">{{board.name}}</div>
+    <button id="board-item-remove" (click)="removeBoard(board)" class="btn btn-outline-dark">X</button>
+  </div>
+</div>

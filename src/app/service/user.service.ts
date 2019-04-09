@@ -27,4 +27,13 @@ export class UserService {
     return this.http.put<User>(this.urlUserService, user, options);
   }
 
+  public getAllBoards(user: User) {
+    let url = this.urlUserService + "?id=" + user.id;
+    console.log('Sending to ' + url);
+
+    let options = { headers: this.httpHeaders };
+
+    return this.http.get<User>(url, options);
+  }
+
 }
