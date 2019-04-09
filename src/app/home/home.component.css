@@ -1,12 +1,12 @@
 #details, #sidebar {
     float: left;
+    padding: 7px;
 }
 
 #sidebar {
     width: 25vw;
     background-color: #1da1f2;
     min-height: 100vh;
-    padding: 5px;
     /*shadow */
     -moz-box-shadow: 5px 5px 5px #ccc;
     -webkit-box-shadow: 5px 5px 5px #ccc;

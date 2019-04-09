@@ -1,3 +1,33 @@
-<p>
-  {{board.name}}
-</p>
+<h1>Board: {{board.name}}</h1>
+
+<div id="interest-header">
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Nuevo interes</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <div class="input-group">
+            <input #interestValue id="interestValue" class="form-control" placeholder="Interest value">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close(interestValue.value)">Crear</button>
+    </div>
+  </ng-template>
+
+  <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Crear interes</button>
+</div>
+
+<div id="interest-list">
+  <div id="interest-item" *ngFor="let interest of interests">
+    <div id="interest-item-name">{{interest.value}}</div>
+    <button id="interest-item-remove" (click)="removeInterest(interest)" class="btn btn-outline-dark">X</button>
+  </div>
+</div>
