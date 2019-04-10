@@ -7,8 +7,7 @@ Local = http://localhost:4288  <br />
 Prod = https://twitter-board-app.herokuapp.com
 
 # Quick View
-
-[](https://github.com/fmalessio/twitter-board/blob/master/files/twitter-board.gif)
+![proview](https://github.com/fmalessio/twitter-board/blob/master/files/twitter-board.gif)
 
 ## Development server
 
