@@ -1,10 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Board } from '../classes/board';
 import { Interest } from '../classes/interest';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { InterestService } from '../service/interest.service';
 import { User } from '../classes/user';
 import { HttpErrorResponse } from '@angular/common/http';
+import { BoardService } from '../service/board.service';
+import { timer, Subscription } from 'rxjs';
+import { Tweet } from '../classes/tweet';
 
 @Component({
   selector: 'app-board-details',
@@ -14,21 +17,72 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class BoardDetailsComponent implements OnInit {
 
   private _board: Board;
-  interests: Interest[] = [];
+  interests: Interest[];
 
-  constructor(private modalService: NgbModal, private interestService: InterestService) { }
+  // tweets
+  private searchTweetsSubscription: Subscription;
+  tweets: Tweet[];
+
+  constructor(private modalService: NgbModal, private interestService: InterestService, private boardService: BoardService) {
+  }
 
   ngOnInit() {
   }
 
   @Input()
   set board(board: Board) {
+    // reset
+    this.interests = [];
+    this.tweets = [];
+    this.stopTweetsSubscription();
+    // create
     this._board = board;
-    console.log("TODO: call service to show all interest");
+    this.searchInterestsAndTweets(board);
   }
 
   get board(): Board {
     return this._board;
+  }
+
+  private searchInterestsAndTweets(board: Board) {
+    // Get all interests
+    this.boardService.getAllIntersts(board).subscribe(
+      (data: Interest[]) => {
+        console.log("Backend OK.");
+        console.log(data);
+        this.interests = data;
+
+        if (data.length > 0) {
+          this.startTweetsSubscription();
+        }
+      },
+      (httpError: HttpErrorResponse) => {
+        console.log(`Backend returned code ${httpError.status}`);
+      }
+    );
+  }
+
+  private startTweetsSubscription() {
+    this.searchTweetsSubscription = timer(500, 5000).subscribe(x => {
+      console.log("Searching new tweets...");
+
+      this.boardService.getNewTweets(this.board).subscribe(
+        (data: Tweet[]) => {
+          console.log("Backend OK.");
+          console.log(data);
+          this.tweets = this.tweets.concat(data);
+        },
+        (httpError: HttpErrorResponse) => {
+          console.log(`Backend returned code ${httpError.status}`);
+        }
+      );
+    });
+  }
+
+  private stopTweetsSubscription() {
+    if (this.searchTweetsSubscription) {
+      this.searchTweetsSubscription.unsubscribe()
+    }
   }
 
   open(content) {
@@ -67,6 +121,11 @@ export class BoardDetailsComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  // Updating ngfor to refresh the html componet
+  public identifyFor(index: number, item: any): any {
+    return item;
   }
 
 }

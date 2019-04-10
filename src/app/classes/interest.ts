@@ -1,3 +1,5 @@
+import { Tweet } from './tweet';
+
 export class Interest {
 
     public static HASHTAG = "HASHTAG";
@@ -7,6 +9,7 @@ export class Interest {
     value: string;
     interestType: string;
     boardId: number;
+    tweets?: Tweet[];
 
     constructor(value: string, boardId: number) {
         this.value = value;

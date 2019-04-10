@@ -25,9 +25,15 @@
   <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Crear interes</button>
 </div>
 
-<div id="interest-list">
-  <div id="interest-item" *ngFor="let interest of interests">
+<div id="interest-list" *ngIf="interests.length > 0">
+  <div id="interest-item" *ngFor="let interest of interests; trackBy:identifyFor">
     <div id="interest-item-name">{{interest.value}}</div>
     <button id="interest-item-remove" (click)="removeInterest(interest)" class="btn btn-outline-dark">X</button>
+  </div>
+</div>
+
+<div id="tweet-list" *ngIf="tweets.length > 0">
+  <div id="tweets-item" *ngFor="let tweet of tweets; trackBy:identifyFor">
+    <div id="tweets-item-name">{{tweet.text}}</div>
   </div>
 </div>

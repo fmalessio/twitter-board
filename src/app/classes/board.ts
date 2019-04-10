@@ -5,7 +5,7 @@ export class Board {
     id?: number;
     name: string;
     userId: string;
-    interests: Interest[];
+    interests?: Interest[];
 
     constructor(name: string, userId: string) {
         this.name = name;
