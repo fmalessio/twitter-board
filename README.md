@@ -6,6 +6,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 Local = http://localhost:4288  <br />
 Prod = https://twitter-board-app.herokuapp.com
 
+### Github backend
+https://github.com/fmalessio/twitter-api
+
 # Quick View
 ![proview](https://github.com/fmalessio/twitter-board/blob/master/files/twitter-board.gif)
 
