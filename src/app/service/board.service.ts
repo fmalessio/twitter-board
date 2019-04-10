@@ -38,8 +38,8 @@ export class BoardService {
     return this.http.get<Interest[]>(url);
   }
 
-  public getNewTweets(board: Board): Observable<Tweet[]> {
-    let url = this.urlUserService + `/${board.id}/tweets?from=0&to=0`;
+  public getNewTweets(board: Board, lastSearched: number): Observable<Tweet[]> {
+    let url = this.urlUserService + `/${board.id}/tweets?last-searched=${lastSearched}`;
     console.log('Getting from ' + url);
 
     let options = { headers: this.httpHeaders };

@@ -32,8 +32,38 @@
   </div>
 </div>
 
+<!--
 <div id="tweet-list" *ngIf="tweets.length > 0">
   <div id="tweets-item" *ngFor="let tweet of tweets; trackBy:identifyFor">
     <div id="tweets-item-name">{{tweet.text}}</div>
   </div>
+</div>
+-->
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Texto</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Usuario</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let tweet of getTweetsPaginated; trackBy:identifyFor">
+      <th scope="row">{{ tweet.text }}</th>
+      <td>{{tweet.createdAt  | date:'yyyy-MM-dd HH:mm'}}</td>
+      <td>{{ tweet.fromUser }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="d-flex justify-content-between p-2">
+  <ngb-pagination [collectionSize]="tableCompleteSize()" [(page)]="page" [pageSize]="pageSize">
+  </ngb-pagination>
+
+  <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+    <option [ngValue]="10">10</option>
+    <option [ngValue]="20">20</option>
+    <option [ngValue]="30">30</option>
+  </select>
 </div>
