@@ -2,6 +2,14 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.6.
 
+### Host information
+Local = http://localhost:4288  <br />
+Prod = https://twitter-board-app.herokuapp.com
+
+# Quick View
+
+[](https://github.com/fmalessio/twitter-board/blob/master/files/twitter-board.gif)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
