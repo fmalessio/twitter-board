@@ -27,4 +27,14 @@ export class InterestService {
     return this.http.post<Interest>(this.urlUserService, interest, options);
   }
 
+  public delete(interest: Interest, token: string): Observable<{}> {
+    let url = this.urlUserService + `/${interest.id}`;
+    console.log('Sending to ' + url);
+
+    this.httpHeaders = this.httpHeaders.append('token', token);
+    let options = { headers: this.httpHeaders };
+
+    return this.http.delete(this.urlUserService, options);
+  }
+
 }

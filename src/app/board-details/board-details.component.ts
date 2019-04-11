@@ -121,6 +121,21 @@ export class BoardDetailsComponent implements OnInit {
 
   }
 
+  public removeInterest(interest: Interest) {
+    let user: User = JSON.parse(localStorage.getItem(User.STORAGE_NAME));
+
+    this.interestService.delete(interest, user.token).subscribe(
+      () => {
+        console.log("Backend OK.");
+        this.interests = this.interests.filter(item => item.id !== interest.id);
+      },
+      (httpError: HttpErrorResponse) => {
+        console.log(`Backend returned code ${httpError.status}`);
+      }
+    );
+
+  }
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
