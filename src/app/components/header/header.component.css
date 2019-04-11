@@ -17,6 +17,7 @@
     font-size: 18px;
     line-height: 25px;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 /* line-height = font-size -> prevent the header to increase when the font gets bigger */

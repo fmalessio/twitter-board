@@ -5,7 +5,7 @@ export class Interest {
     public static HASHTAG = "HASHTAG";
     public static USER = "USER";
 
-    id?: number;
+    id?: string;
     value: string;
     interestType: string;
     boardId: number;
