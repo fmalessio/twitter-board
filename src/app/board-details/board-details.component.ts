@@ -112,6 +112,9 @@ export class BoardDetailsComponent implements OnInit {
       (data: Interest) => {
         console.log("Backend OK.");
         console.log(data);
+        if (this.interests.length == 0) {
+          this.startTweetsSubscription();
+        }
         this.interests.push(data);
       },
       (httpError: HttpErrorResponse) => {

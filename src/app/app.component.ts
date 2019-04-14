@@ -64,6 +64,7 @@ export class AppComponent implements OnInit {
     } else {
       localStorage.removeItem(User.STORAGE_NAME);
       this.nevigateBySession();
+      window.location.reload();
     }
   }
 
