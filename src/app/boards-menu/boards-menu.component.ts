@@ -82,7 +82,18 @@ export class BoardsMenuComponent implements OnInit {
   }
 
   public removeBoard(board: Board) {
-    console.log(board);
+    console.log(`Remove boardboard: ${board.name}`);
+    let user: User = JSON.parse(localStorage.getItem(User.STORAGE_NAME));
+    this.boardService.delete(board, user.token).subscribe(
+      () => {
+        console.log("Backend OK.");
+        this.boards = this.boards.filter(item => item.id !== board.id);
+        this.onOpenBoard.emit(null);
+      },
+      (httpError: HttpErrorResponse) => {
+        console.log(`Backend returned code ${httpError.status}`);
+      }
+    );
   }
 
 }

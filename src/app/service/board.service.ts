@@ -35,7 +35,7 @@ export class BoardService {
 
     let options = { headers: this.httpHeaders };
 
-    return this.http.get<Interest[]>(url);
+    return this.http.get<Interest[]>(url, options);
   }
 
   public getNewTweets(board: Board, lastSearched: number): Observable<Tweet[]> {
@@ -44,7 +44,17 @@ export class BoardService {
 
     let options = { headers: this.httpHeaders };
 
-    return this.http.get<Tweet[]>(url);
+    return this.http.get<Tweet[]>(url, options);
+  }
+
+  public delete(board: Board, token: string): Observable<{}> {
+    let url = this.urlUserService + `/${board.id}`;
+    console.log('Sending to ' + url);
+
+    this.httpHeaders = this.httpHeaders.append('token', token);
+    let options = { headers: this.httpHeaders };
+
+    return this.http.delete(url, options);
   }
 
 }
