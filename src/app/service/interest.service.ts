@@ -34,7 +34,7 @@ export class InterestService {
     this.httpHeaders = this.httpHeaders.append('token', token);
     let options = { headers: this.httpHeaders };
 
-    return this.http.delete(this.urlUserService, options);
+    return this.http.delete(url, options);
   }
 
 }
